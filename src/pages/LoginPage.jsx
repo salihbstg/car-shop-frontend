@@ -20,7 +20,7 @@ const LoginPage = () => {
             )
             if (response != null) {
                 const accessToken = response.data.accessToken;
-                console.log(accessToken);
+                localStorage.setItem("token",accessToken);
                 setMessage("");
                 navigate("/cars");
             }
