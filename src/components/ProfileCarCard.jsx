@@ -1,16 +1,11 @@
 import axios from 'axios';
 import React from 'react'
-
+import api from '../api/Api'
 const ProfileCarCard = ({ cars,setCars }) => {
 const deleteCar=async (id)=>{
     try{
-        await axios.delete("http://localhost:8080/api/v1/cars/"+id,{
-            headers:{
-                Authorization:"Bearer "+localStorage.getItem("token")
-            }
-        });
+        await api.delete("api/v1/cars/"+id);
         setCars(prev=>prev.filter(car=>car.id !==id));
-
     }
     catch(exception){
         console.log(exception);

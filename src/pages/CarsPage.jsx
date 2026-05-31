@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 import CarCard from '../components/CarCard';
 import Navbar from '../components/Navbar';
+import api from '../api/Api';
+
 const CarsPage = () => {
 
     const [cars, setCars] = useState([]);
@@ -19,26 +21,16 @@ const CarsPage = () => {
     const fetchCars = async () => {
 
         try {
-
-            const token =
-                localStorage.getItem("token");
                 
-            const { data } = await axios.get(
-                "http://localhost:8080/api/v1/cars?brand="+search,
-                {
-                    headers: {
-                        Authorization: "Bearer "+token
-                    }
-                }
+            const { data } = await api.get(
+                "/api/v1/cars?brand="+search
             );
 
             setCars(data.content);
 
-            console.log(data);
-
         } catch (err) {
 
-            console.log(err);
+            console.log(err.response);
         }
     };
 
@@ -54,7 +46,7 @@ const CarsPage = () => {
 
                 {
                     cars.map(car => (
-                        <CarCard car={car}>
+                        <CarCard key={car.id} car={car}>
                           
                         </CarCard>
                     ))

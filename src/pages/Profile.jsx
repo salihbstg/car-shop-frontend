@@ -3,6 +3,7 @@ import Navbar from '../components/Navbar'
 import axios from 'axios'
 import ProfileCarCard from '../components/ProfileCarCard';
 import CreateCar from '../components/CreateCar';
+import api from '../api/Api';
 const Profile = () => {
 
     const [customer, setCustomer] = useState();
@@ -13,18 +14,8 @@ const Profile = () => {
 
     const fetchCustomerData = async () => {
         try {
-
-            const token =
-                localStorage.getItem("token");
-
-
-            const { data } = await axios.get(
-                "http://localhost:8081/api/v1/customers/me",
-                {
-                    headers: {
-                        Authorization: "Bearer " + token
-                    }
-                }
+            const { data } = await api.get(
+               "api/v1/customers/me"
             );
 
             setCustomer(data);
@@ -40,14 +31,10 @@ const Profile = () => {
         try {
             const token =
                 localStorage.getItem("token");
-            const { data } = await axios.get("http://localhost:8080/api/v1/cars/by-customer-id", {
+            const { data } = await api.get("/api/v1/cars/by-customer-id", {
                 params: {
                     customerId: customerId
-                },
-                headers: {
-                    Authorization: "Bearer " + token
                 }
-
             });
             setCars(data);
         }

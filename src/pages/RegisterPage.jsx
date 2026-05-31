@@ -1,6 +1,6 @@
 import React from 'react'
 import axios from 'axios'
-
+import api from '../api/Api'
 const LoginPage = () => {
 
     const [username, setUsername] = React.useState('')
@@ -10,12 +10,10 @@ const LoginPage = () => {
     const [lastName, setLastname] = React.useState('')
     const [phone, setPhone] = React.useState('')
     const [errorMessage,setErrorMessage]=React.useState('')
-
-    const authApiUrl = "http://localhost:8088/auth";
     const handleRegister = async () => {
         try{
-            const response = await axios.post(
-            authApiUrl + "/register",
+            const response = await api.post(
+            "auth/register",
             {
                 "email": email,
                 "username": username,

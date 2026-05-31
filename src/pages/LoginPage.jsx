@@ -1,6 +1,7 @@
 import React from 'react'
 import axios from 'axios'
 import { useNavigate } from "react-router-dom"
+import api from '../api/Api'
 
 const LoginPage = () => {
 
@@ -8,11 +9,10 @@ const LoginPage = () => {
     const [password, setPassword] = React.useState('')
     const [message, setMessage] = React.useState('')
     const navigate = useNavigate();
-    const authApiUrl = "http://localhost:8088/auth";
     const handleLogin = async () => {
         try {
-            const response = await axios.post(
-                authApiUrl + "/login",
+            const response = await api.post(
+              "auth/login",
                 {
                     "identifier": username,
                     "password": password
