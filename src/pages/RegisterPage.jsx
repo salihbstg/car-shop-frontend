@@ -31,35 +31,37 @@ const LoginPage = () => {
         }
     }
     return (
-        <form onSubmit={
+      <div className='login-register-bg vh-100 d-flex flex-column justify-content-center'>
+         <form onSubmit={
             e=>{
                 e.preventDefault();
                 handleRegister();
             }
-        } className='d-flex text-white gap-3 bg-dark flex-column px-2 align-items-center vh-100 justify-content-center'>
+        } className='login-register-border d-flex gap-3 py-5 w-25 mx-auto flex-column align-items-center text-white justify-content-center'>
             <h1>Kayıt Ol</h1>
-            <input required value={username} className='form-control w-25' type="text" placeholder="Kullanıcı adınızı girin." onChange={
+            <input required value={username} className='form-control w-75' type="text" placeholder="Kullanıcı adınızı girin." onChange={
                 e => setUsername(e.target.value)
             }></input>
-            <input required value={password} type="password" className='form-control w-25' placeholder="Şifrenizi girin." onChange={
+            <input required value={password} type="password" className='form-control w-75' placeholder="Şifrenizi girin." onChange={
                 e => setPassword(e.target.value)
             }></input>
-            <input required value={email} className='form-control w-25' type="text" placeholder="Mail adresinizi girin." onChange={
+            <input required value={email} className='form-control w-75' type="text" placeholder="Mail adresinizi girin." onChange={
                 e => setEmail(e.target.value)
             }></input>
-            <input required value={firstName} className='form-control w-25' type="text" placeholder="Adınızı girin." onChange={
+            <input required value={firstName} className='form-control w-75' type="text" placeholder="Adınızı girin." onChange={
                 e => setFirstname(e.target.value)
             }></input>
-            <input required value={lastName} className='form-control w-25' type="text" placeholder="Soyadınızı girin." onChange={
+            <input required value={lastName} className='form-control w-75' type="text" placeholder="Soyadınızı girin." onChange={
                 e => setLastname(e.target.value)
             }></input>
-            <input required value={phone} className='form-control w-25' type="text" placeholder="Telefon numaranızı girin." onChange={
+            <input required value={phone} className='form-control w-75' type="text" placeholder="Telefon numaranızı girin." onChange={
                 e => setPhone(e.target.value)
             }></input>
-            <button required type='submit' className="btn btn-primary w-25 fw-bold fs-5">Kayıt Ol</button>
-            <a className='text-white fw-bold' href="/">Giriş yap</a>
+            <button required type='submit' className="btn btn-primary w-75 fw-bold fs-5">Kayıt Ol</button>
+            <a className='text-white fw-bold' href="/login">Giriş yap</a>
             <p>{errorMessage}</p>
         </form>
+       </div>
     )
 }
 export default LoginPage;

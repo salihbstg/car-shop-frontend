@@ -22,7 +22,7 @@ const LoginPage = () => {
                 const accessToken = response.data.accessToken;
                 localStorage.setItem("token",accessToken);
                 setMessage("");
-                navigate("/cars");
+                navigate("/home");
             }
         }
         catch (error) {
@@ -30,23 +30,27 @@ const LoginPage = () => {
         }
     }
     return (
-        <form onSubmit={
+        <div className='login-register-bg vh-100 d-flex flex-column justify-content-center'>
+            <form
+             style={{ width: '40%' }}
+            onSubmit={
             e => {
                 e.preventDefault();
                 handleLogin();
             }
-        } className='d-flex gap-3 flex-column px-2 align-items-center vh-100 text-white bg-dark justify-content-center'>
+        } className='login-register-border d-flex gap-3 py-5 mx-auto flex-column align-items-center text-white justify-content-center'>
             <h1>Giriş</h1>
-            <input required value={username} className='form-control w-25' type="text" placeholder="Kullanıcı adı veya mail adresinizi girin." onChange={
+            <input required value={username} className='form-control w-75' type="text" placeholder="Kullanıcı adı veya mail adresinizi girin." onChange={
                 e => setUsername(e.target.value)
             }></input>
-            <input required value={password} className='form-control w-25' type="password" placeholder="Şifrenizi girin." onChange={
+            <input required value={password} className='form-control w-75' type="password" placeholder="Şifrenizi girin." onChange={
                 e => setPassword(e.target.value)
             }></input>
-            <button type="submit" className="btn btn-primary w-25 fw-bold fs-5">Giriş</button>
+            <button type="submit" className="btn btn-primary w-75 fw-bold fs-5">Giriş</button>
             <a className='text-white fw-bold' href="/register">Üyelik oluştur</a>
             <p>{message}</p>
         </form>
+        </div>
     )
 }
 

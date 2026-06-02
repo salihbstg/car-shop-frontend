@@ -1,0 +1,7 @@
+<div claclassNamess="card-body">
+                <p className="card-text">Ad: {customer.firstName}</p>
+                <p className="card-text">Soyad: {customer.lastName}</p>
+                <p className="card-text">Mail: {customer.email}</p>
+                <p className="card-text">Telefon: {customer.phone}</p>
+                <p className="card-text">Üyelik tarihi: {customer.createdAt}</p>
+            </div>

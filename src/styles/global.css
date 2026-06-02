@@ -1,0 +1,7 @@
+.login-register-border{
+    border:3px dotted #ffffff;
+    border-radius: 1.5rem;
+}
+.login-register-bg{
+    background-color: #111827;
+}
