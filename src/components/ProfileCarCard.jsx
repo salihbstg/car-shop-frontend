@@ -1,8 +1,12 @@
 import React from 'react'
 
 const ProfileCarCard = ({car}) => {
+    
+    console.log(car.imageUrls);
+    
+    
   return (
-     <div className='d-flex gap-3 fw-bold mt-3 flex-column w-25 align-items-center bg-white border rounded-5'>
+     <div className='d-flex gap-3 pb-3 mb-4 fw-bold mt-1 flex-column w-25 align-items-center bg-secondary border rounded-5'>
             <div
                 id={`carousel-${car.id}`}
                 className="carousel slide"
@@ -10,6 +14,7 @@ const ProfileCarCard = ({car}) => {
             >
                 <div className="carousel-inner">
                     {car.imageUrls.map((url, index) => (
+
                         <div
                             key={index}
                             className={`carousel-item ${index === 0 ? "active" : ""
@@ -19,6 +24,7 @@ const ProfileCarCard = ({car}) => {
                                 src={url}
                                 className="d-block w-100 rounded-top-5"
                                 alt={`car-${index}`}
+                                
                             />
                         </div>
                     ))}
@@ -58,6 +64,10 @@ const ProfileCarCard = ({car}) => {
                 <p>Renk: {car.carColor}</p>
                 <p>Vites tipi: {car.transmissionType}</p>
                 <p>Yakıt tipi: {car.fuelType}</p>
+            </div>
+            <div className='d-flex flex-column gap-3'>
+                <button className='btn btn-danger w-100'>Sil</button>
+                <button className='btn btn-primary w-100'>Güncelle</button>
             </div>
         </div>
   )

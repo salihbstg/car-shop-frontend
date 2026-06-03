@@ -4,7 +4,8 @@ const CarCard = ({ car }) => {
     console.log(car);
 
     return (
-        <div className='d-flex gap-3 fw-bold mt-3 flex-column w-25 align-items-center bg-white border rounded-5'>
+        <div
+            className='d-flex gap-3  fw-bold mt-3 flex-column flex-wrap align-items-center col-md-5 col-sm-12 col-lg-3 bg-white border rounded-5'>
             <div
                 id={`carousel-${car.id}`}
                 className="carousel slide"
@@ -19,8 +20,11 @@ const CarCard = ({ car }) => {
                         >
                             <img
                                 src={url}
-                                className="d-block w-100 rounded-top-5"
+                                className="w-100 rounded-top-5"
                                 alt={`car-${index}`}
+                                style={{
+                                    height: "250px",
+                                }}
                             />
                         </div>
                     ))}
