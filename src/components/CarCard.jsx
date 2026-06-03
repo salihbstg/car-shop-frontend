@@ -1,7 +1,6 @@
 import React from 'react'
 
 const CarCard = ({ car }) => {
-    console.log(car);
 
     return (
         <div

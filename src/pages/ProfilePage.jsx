@@ -4,10 +4,10 @@ import ProfileCarCard from '../components/ProfileCarCard';
 const ProfilePage = () => {
     const [customer, setCustomer] = useState({});
     const [cars, setCars] = useState([]);
-
+    const [message, setMessage] = useState("");
     useEffect(() => {
         getCustomer();
-    }, [cars])
+    }, [])
 
 
     const getCustomer = async () => {
@@ -31,30 +31,33 @@ const ProfilePage = () => {
 
     const handleCreateCarSubmit = async e => {
         e.preventDefault();
+        try {
+            const formData = new FormData(e.target);
 
-        const formData = new FormData(e.target);
+            const images = formData.getAll("images");
 
-        const images = formData.getAll("images");
+            const imageUrls = [];
 
-        const imageUrls = [];
-
-        for (const image of images) {
-            const url = await getLink(image);
-            imageUrls.push(url);
+            for (const image of images) {
+                const url = await getLink(image);
+                imageUrls.push(url);
+            }
+            const response = await api.post("/api/v1/cars", {
+                brand: formData.get("brand"),
+                model: formData.get("model"),
+                year: Number(formData.get("year")),
+                plate: formData.get("plate"),
+                carColor: formData.get("carColor"),
+                transmissionType: formData.get("transmissionType"),
+                fuelType: formData.get("fuelType"),
+                imageUrls: imageUrls
+            })
+            setCars(prev => [...prev, response.data])
+            setMessage("🚗 Aracınız başarıyla kaydedildi.");
         }
-
-        console.log("images:", images);
-        console.log("images length:", images.length);
-        api.post("/api/v1/cars",{
-            brand: formData.get("brand"),
-            model: formData.get("model"),
-            year: Number(formData.get("year")),
-            plate: formData.get("plate"),
-            carColor: formData.get("carColor"),
-            transmissionType: formData.get("transmissionType"),
-            fuelType: formData.get("fuelType"),
-            imageUrls:imageUrls
-        })
+        catch (exception) {
+            setMessage("❌ Araç kaydedilirken hata oluştu. ---> ");
+        }
 
     }
 
@@ -77,8 +80,9 @@ const ProfilePage = () => {
                         <p className="card-text">Üyelik tarihi: {customer.createdAt}</p>
                     </div>
                 </div>
-                <div className='w-100 mt-5 mb-5 d-flex align-items-center justify-content-center'>
+                <div className='w-100 mt-5 mb-5 d-flex flex-column align-items-center justify-content-center'>
                     <form onSubmit={handleCreateCarSubmit} className="d-flex flex-column gap-2 p-4 w-75 bg-white rounded-4 shadow-sm">
+
 
                         <label htmlFor="brand" className="fw-semibold">
                             Marka
@@ -191,14 +195,14 @@ const ProfilePage = () => {
                         >
                             İlan Oluştur
                         </button>
-
+                        <p className='text-center mt-3'>{message}</p>
                     </form>
                 </div>
             </div>
             <div className='container col-lg-12 d-flex gap-5 justify-content-center flex-wrap'>
                 {
-                    cars.map((car, index) => {                        
-                        return <ProfileCarCard key={index} car={car} />
+                    cars.map(car => {
+                        return <ProfileCarCard key={car.id} car={car} setCars={setCars} />
                     })
                 }
             </div>

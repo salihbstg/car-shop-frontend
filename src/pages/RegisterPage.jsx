@@ -58,7 +58,7 @@ const LoginPage = () => {
                 e => setPhone(e.target.value)
             }></input>
             <button required type='submit' className="btn btn-primary w-75 fw-bold fs-5">Kayıt Ol</button>
-            <a className='text-white fw-bold' href="/login">Giriş yap</a>
+            <a className='text-white fw-bold' href="/">Giriş yap</a>
             <p>{errorMessage}</p>
         </form>
        </div>

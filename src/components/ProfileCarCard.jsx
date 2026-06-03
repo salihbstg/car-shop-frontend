@@ -1,10 +1,11 @@
 import React from 'react'
-
-const ProfileCarCard = ({car}) => {
-    
-    console.log(car.imageUrls);
-    
-    
+import api from '../api/Api'
+const ProfileCarCard = ({car,setCars}) => {
+       
+    const deleteCar = async (id)=>{
+        await api.delete("/api/v1/cars/"+id);
+        setCars(prev=>prev.filter(car=>car.id!==id))
+    }
   return (
      <div className='d-flex gap-3 pb-3 mb-4 fw-bold mt-1 flex-column w-25 align-items-center bg-secondary border rounded-5'>
             <div
@@ -66,7 +67,9 @@ const ProfileCarCard = ({car}) => {
                 <p>Yakıt tipi: {car.fuelType}</p>
             </div>
             <div className='d-flex flex-column gap-3'>
-                <button className='btn btn-danger w-100'>Sil</button>
+                <button onClick={()=>{
+                    deleteCar(car.id)
+                }} className='btn btn-danger w-100'>Sil</button>
                 <button className='btn btn-primary w-100'>Güncelle</button>
             </div>
         </div>
